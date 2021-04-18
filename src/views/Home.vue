@@ -27,7 +27,7 @@
           <div class="box">
             <div class="list1 list">
               <h5>星期一</h5>
-              <p>{{$store.state.conut}}</p>
+              <p>{{ $store.state.conut }}</p>
             </div>
             <p>每日推荐</p>
           </div>
@@ -154,6 +154,14 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$rq
+      .post("dj/program?rid=336355127")
+      .then((res) => {
+        console.log(res);
+      });
+    // this.$message('这是一条消息提示')
+  },
   methods: {
     toDetail(e) {
       console.log(e);
@@ -167,7 +175,6 @@ export default {
   // },
 };
 </script>
-
 
 <style lang="scss">
 .home {
@@ -276,7 +283,7 @@ export default {
       // width: 100%;
       height: 80%;
       // margin: 0 10px;
-      
+
       margin-right: 14px;
       border: 1px solid #eee;
       box-sizing: border-box;
