@@ -2,6 +2,7 @@
   <div id="app">
     <HeaderNav msg="hello" />
     <Left></Left>
+    <Footer />
     <!-- <div id="nav">
       <router-link to="/">Home</router-link>
     </div>-->
@@ -12,22 +13,24 @@
 <script>
 // eslint-disable-next-line
 /* eslint-disable */
-import HeaderNav from '@/components/Header.vue'
-import Left from '@/components/Left.vue'
+import HeaderNav from "@/components/Header.vue";
+import Left from "@/components/Left.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
-  components:{
+  components: {
     HeaderNav,
-    Left
-  }
-}
+    Left,
+    Footer,
+  },
+};
 </script>
 
 <style lang="scss">
 body {
   padding: 0;
   margin: 0;
-  font-family: "宋体","黑体"
+  font-family: Arial, Helvetica, sans-serif;
 }
 // #app {
 
@@ -50,5 +53,28 @@ img {
   vertical-align: middle;
 }
 
+h5,
+h4,
+h3,
+h2,
+h1,
+p {
+  margin: 0;
+}
 
+.box_content {
+  position: absolute;
+  top: 55px;
+  left: 200px;
+  // width: 100%;
+  right: 0;
+  height: 100%;
+}
+.content {
+  margin: auto;
+  margin-top: 20px;
+  max-width: 1000px;
+  overflow: hidden;
+  margin-bottom: 10vh;
+}
 </style>

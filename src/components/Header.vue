@@ -56,6 +56,10 @@ export default {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  // min-width: 1200px;
+  overflow: hidden;
+  z-index: 999;
+
   .left {
     display: flex;
     align-items: center;

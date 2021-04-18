@@ -4,83 +4,154 @@
       <ul>
         <li
           @click="toDetail(index)"
-          :class="li_on == index ? 'on':''"
-          v-for="(item,index) in li_list"
+          :class="li_on == index ? 'on' : ''"
+          v-for="(item, index) in li_list"
           :key="index"
-        >{{item}}</li>
+        >
+          {{ item }}
+        </li>
       </ul>
     </div>
     <div class="content">
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <swiper-slide class="slide-4"></swiper-slide>
-        <swiper-slide class="slide-5"></swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-      </swiper>
-      <!-- <swiper ref="mySwiper" :options="swiperOptions">
-        <swiper-slide>
-          <img
-            src="http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89"
-            alt
-          />
-        </swiper-slide>
-        <swiper-slide>
-          <img
-            src="http://p1.music.126.net/Ez1tY_KZltigzD8kEw_Piw==/109951165297680934.jpg?imageView&quality=89"
-            alt
-          />
-        </swiper-slide>
-        <swiper-slide>
-          <img
-            src="http://p1.music.126.net/jCPFWW1cKbrYuh841c85vQ==/109951165296405373.jpg?imageView&quality=89"
-            alt
-          />
-        </swiper-slide>
-        <swiper-slide>
-          <img
-            src="http://p1.music.126.net/gWYPtajUYlEIG7aKdX4_wg==/109951165298241414.jpg?imageView&quality=89"
-            alt
-          />
-        </swiper-slide>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </swiper>-->
+      <el-carousel :interval="4000" type="card" height="200px" :autoplay="true">
+        <el-carousel-item v-for="(item, key) in imgUrl" :key="key">
+          <img :src="item" alt />
+        </el-carousel-item>
+      </el-carousel>
+      <div class="content_list">
+        <div class="title">
+          <h5>推荐歌单</h5>
+          <p>更多></p>
+        </div>
+        <div class="list_box">
+          <div class="box">
+            <div class="list1 list">
+              <h5>星期一</h5>
+              <p>{{$store.state.conut}}</p>
+            </div>
+            <p>每日推荐</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p2.music.126.net/aA5mgvKGXfgEjPfCySnBlw==/109951165117086425.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p4.music.126.net/csO9HMCP-HIwbjDP2_XSCQ==/109951165020624503.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>唱一首秋天情歌，让夕阳把完美和遗憾封存</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/Y7cveTgV3qbYTwqJ2FNnBw==/109951164526625758.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>夏天是一首关于青春的诗，而你是主角</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/q2H0-6KbZrLEN5IlCNB7Bw==/109951165084536020.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/UONudz_jF1hWeTuXFtE-5w==/109951164910552353.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p4.music.126.net/csO9HMCP-HIwbjDP2_XSCQ==/109951165020624503.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/Y7cveTgV3qbYTwqJ2FNnBw==/109951164526625758.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/v1DrIznGsHarvU8K6spKPQ==/109951165261888787.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+          <div class="box">
+            <div class="list1 list">
+              <img
+                src="http://p3.music.126.net/v1DrIznGsHarvU8K6spKPQ==/109951165261888787.jpg?param=140y140"
+                alt
+              />
+            </div>
+            <p>忘记是为了再一次义无反顾的眷恋</p>
+          </div>
+        </div>
+      </div>
+      <div class="content_list">
+        <div class="title">
+          <h5>热门音乐</h5>
+          <p>更多></p>
+        </div>
+        <ol class="music_list">
+          <li class="list">
+            <div class="box">
+              <img
+                src="http://p1.music.126.net/H3QxWdf0eUiwmhJvA4vrMQ==/1407374893913311.jpg?param=40y40"
+                alt=""
+              />
+              <div>
+                <h5>温柔</h5>
+                <p>五月天</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-
-// @ is an alias to /src
-import "swiper/swiper-bundle.css";
-
 export default {
   name: "Home",
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
+  components: {},
   data() {
     return {
       li_on: 0,
       li_list: ["个性推荐", "歌单", "主播电台", "排行榜", "歌手", "最新音乐"],
-      swiperOption: {
-        spaceBetween: 30,
-        effect: "fade",
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      },
+      imgUrl: [
+        "http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89",
+        "http://p1.music.126.net/ZGUns7WvgJ0ZF4txDMy2BA==/109951165367464959.jpg?imageView&quality=89",
+        "http://p1.music.126.net/j1SpKTAlu7cxAScpGkpKfw==/109951165367550061.jpg?imageView&quality=89",
+        "http://p1.music.126.net/xyN0mJ7dYicGEbU--zmiRg==/109951165367513014.jpg?imageView&quality=89",
+      ],
     };
   },
   methods: {
@@ -89,11 +160,7 @@ export default {
       this.li_on = e;
     },
   },
-  // computed: {
-  //   swiper() {
-  //     return this.$refs.mySwiper.$swiper;
-  //   },
-  // },
+  computed: {},
   // mounted() {
   //   console.log("Current Swiper instance object", this.swiper);
   //   this.swiper.slideTo(0, 1000, false);
@@ -102,7 +169,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 .home {
   position: fixed;
   top: 55px;
@@ -111,7 +178,23 @@ export default {
   bottom: 0;
   box-sizing: border-box;
   padding: 0 30px;
+  background: #fafafa;
+  // min-width: 1100px;
+  // overflow: hidden;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 1;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #e1e1e2;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
 }
+
 .page_nav {
   ul {
     display: flex;
@@ -142,25 +225,92 @@ export default {
     }
   }
 }
-.swiper {
-  height: 360px;
-  .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    &.slide-1 {
-      background-image: url("http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89");
+
+.el-carousel__indicator.is-active .el-carousel__button {
+  background-color: #c62f2f !important;
+}
+.content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content_list {
+  margin-bottom: 40px;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    h5 {
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0;
+      color: #333;
+      font-family: Microsoft Yahei;
     }
-    &.slide-2 {
-      background-image: url("http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89");
+    p {
+      font-size: 12px;
+      cursor: pointer;
+      color: #999;
     }
-    &.slide-3 {
-      background-image: url("http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89");
+  }
+  .list_box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    .box {
+      width: 19%;
+      margin-bottom: 15px;
+      p {
+        font-size: 12px;
+        color: #333;
+        margin-top: 5px;
+        // width: 190px;
+      }
     }
-    &.slide-4 {
-      background-image: url("http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89");
+    justify-content: space-between;
+    .list {
+      width: 100%;
+      text-align: center;
+      // width: 100%;
+      height: 80%;
+      // margin: 0 10px;
+      
+      margin-right: 14px;
+      border: 1px solid #eee;
+      box-sizing: border-box;
+      cursor: pointer;
     }
-    &.slide-5 {
-      background-image: url("http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89");
+    .list1 {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      flex-flow: column;
+      justify-content: center;
+      h5 {
+        font-size: 18px;
+        font-weight: 400;
+        font-family: Microsoft Yahei;
+      }
+      p {
+        color: #c62f2f;
+        font-size: 66px;
+        // font-family: Microsoft Yahei;
+      }
+    }
+  }
+  .music_list {
+    margin-top: 10px;
+    padding-left: 20px;
+    .list {
+      .box {
+        display: flex;
+        align-items: center;
+      }
+      img {
+        width: 40px;
+      }
     }
   }
 }

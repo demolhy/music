@@ -153,6 +153,8 @@ export default {
   background: #f5f5f7;
   bottom: 0;
   overflow-y: auto;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     width: 2px;
     height: 1;
