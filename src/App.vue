@@ -16,13 +16,12 @@
 import HeaderNav from "@/components/Header.vue";
 import Left from "@/components/Left.vue";
 import Footer from "@/components/Footer.vue";
-
 export default {
   components: {
     HeaderNav,
     Left,
     Footer,
-  },
+  }
 };
 </script>
 
