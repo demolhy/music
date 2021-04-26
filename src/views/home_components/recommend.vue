@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="loading" id="loading"></div>
+    <!-- <div class="loading" id="loading"></div> -->
     <div class="content">
       <el-carousel :interval="4000" type="card" height="200px" :autoplay="true">
         <el-carousel-item v-for="(item, key) in bannerList" :key="key">
@@ -15,8 +15,8 @@
         <div class="list_box">
           <div class="box">
             <div class="list1 list">
-              <h5>星期一</h5>
-              <p>{{ $store.state.conut }}</p>
+              <h5>{{ $store.state.time }}</h5>
+              <p>{{ $store.state.day }}</p>
             </div>
             <p>每日推荐</p>
           </div>
@@ -39,7 +39,12 @@
           <!-- <p>更多></p> -->
         </div>
         <ul class="music_list">
-          <li class="list" v-for="(item, index) in newMusicList" :key="index">
+          <li
+            class="list"
+            v-for="(item, index) in newMusicList"
+            :key="index"
+            @click="paly(item.id)"
+          >
             <div class="lf">
               <span>{{ index + 1 }}</span>
               <img :src="item.picUrl" alt="" />
@@ -60,7 +65,13 @@
 </template>
 
 <script>
-import { musicList, banner, hotSongMenu, newMusic } from "../../api/api";
+import {
+  musicList,
+  banner,
+  hotSongMenu,
+  newMusic,
+  musicSrc,
+} from "../../api/api";
 export default {
   props: {},
   data() {
@@ -74,14 +85,14 @@ export default {
   created() {},
   mounted() {
     // console.log(document.querySelector("#content"));
-    this.load = this.$loading({
-      target: document.querySelector("#loading"),
-      // lock: false,
-      text: "疯狂加载中～",
-      spinner: "el-icon-loading",
-      background: "rgba(0, 0, 0, 0.6)",
-      fullscreen: false,
-    });
+    // this.load = this.$loading({
+    //   target: document.querySelector("#loading"),
+    //   // lock: false,
+    //   text: "疯狂加载中～",
+    //   spinner: "el-icon-loading",
+    //   background: "rgba(0, 0, 0, 0.6)",
+    //   fullscreen: false,
+    // });
     this.getBanner();
     this.getSongMenu();
     this.getNewMusic();
@@ -134,13 +145,21 @@ export default {
       });
       // this.load.close()
     },
+    paly(e) {
+      let data = {
+        id: e,
+      };
+      musicSrc(data).then((res) => {
+        // console.log();
+        this.$store.commit("changeSrc", res.data[0].url);
+      });
+      
+    },
   },
 };
 </script>
 
 <style lang="scss" scpoed>
-
-
 .content img {
   width: 100%;
   height: 100%;
@@ -223,6 +242,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 15px 20px;
+      cursor: pointer;
       &:nth-child(even) {
         background: #f5f5f5;
       }

@@ -13,5 +13,9 @@ export const hotSongMenu = e => {
 }
 
 export const newMusic = e => {
-    return get('personalized/newsong',e)
+    return get('/personalized/newsong',e)
+}
+
+export const musicSrc = e => {
+    return get('/song/url',e)
 }

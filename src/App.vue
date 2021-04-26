@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <HeaderNav msg="hello" />
-    <Left></Left>
+    <Left />
     <Footer />
+    <!-- <videoBox /> -->
     <!-- <div id="nav">
       <router-link to="/">Home</router-link>
     </div>-->
@@ -16,11 +17,13 @@
 import HeaderNav from "@/components/Header.vue";
 import Left from "@/components/Left.vue";
 import Footer from "@/components/Footer.vue";
+import videoBox from "@/components/music.vue";
 export default {
   components: {
     HeaderNav,
     Left,
     Footer,
+    videoBox
   }
 };
 </script>

@@ -12,7 +12,7 @@
         </li>
       </ul>
     </div>
-    <recommend key="1"></recommend>
+    <recommend></recommend>
   </div>
 </template>
 
