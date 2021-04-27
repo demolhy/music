@@ -1,30 +1,21 @@
 <template>
   <div class="footer">
     <aplayer
-      autoplay
       ref="videoPlayer"
       :narrow="false"
       theme="#c62f2f"
-      @play="playing($event)"
-      @pause="pauseing($event)"
-      :music="{
-        title: 'Preparation',
-        artist: 'Hans Zimmer/Richard Harvey',
-        src:
-          'http://m801.music.126.net/20210426231953/b5d10459f2da1852d5b32f748ad5c789/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8580152693/d356/455e/7b8d/4e64e654387559e89848b065b8e27d67.mp3',
-        pic:
-          'http://p1.music.126.net/Cld-gajV3YescBzt1rWWbw==/109951165909496721.jpg',
-        lrc: '[00:00.00]lrc here\n[00:01.00]aplayer',
-      }"
+      :music="playOptopns"
     >
     </aplayer>
     <div class="play_icon">
       <i class="icon1 iconfont icon-xiayishou1"></i>
-      <i 
+      <i
+        v-if="musicStute"
         @click.stop="pauseing"
         class="iconfont icon3 icon-zantingtingzhi"
       ></i>
-      <i 
+      <i
+        v-if="!musicStute"
         @click.stop="playing"
         class="iconfont icon2 icon-bofang"
       ></i>
@@ -47,6 +38,8 @@
 // eslint-disable-next-line
 /* eslint-disable */
 import Aplayer from "vue-aplayer";
+
+
 export default {
   name: "Footer",
   props: {
@@ -58,35 +51,34 @@ export default {
   data() {
     return {
       musicStute: false,
-      ms: false
+      ms: false,
+      playOptopns: {
+        title: "Preparation",
+        artist: "Hans Zimmer/Richard Harvey",
+        src:
+          "http://m701.music.126.net/20210427220952/3444cf4236f8e63f5cc240254ee86491/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8660453303/e94a/ce98/de2b/9159b398d5a069b1638ab05ac8cbfece.mp3",
+        pic:
+          "http://p1.music.126.net/Cld-gajV3YescBzt1rWWbw==/109951165909496721.jpg",
+        lrc: "[00:00.00]lrc here\n[00:01.00]aplayer",
+      },
     };
   },
   methods: {
     playing() {
       const player = this.$refs.videoPlayer.audio;
-      console.log(this.$refs.videoPlayer);
+      console.log(this.$refs.videoPlayer.audio);
       player.play();
       this.musicStute = !this.musicStute;
     },
-    pauseing(){
+    pauseing() {
       const player = this.$refs.videoPlayer.audio;
-      console.log(this.$refs.videoPlayer);
+      console.log(this.$refs.videoPlayer.audio);
       player.pause();
       this.musicStute = !this.musicStute;
-    }
-  },
-  watch:{
-    musicStute(val,oldVal){
-      console.log(val,oldVal);
-      this.ms = !this.ms
-    }
-  },
-  computed: {
-    player() {
-      console.log(312312);
-      return this.$refs.videoPlayer.audio;
     },
   },
+  watch: {},
+  computed: {},
 };
 </script>
 
