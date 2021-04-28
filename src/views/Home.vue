@@ -12,17 +12,20 @@
         </li>
       </ul>
     </div>
-    <recommend></recommend>
+    <recommend v-if="false"></recommend>
+    <song-list></song-list>
   </div>
 </template>
 
 <script>
 
 import recommend from './home_components/recommend'
+import songList from './home_components/songList'
 export default {
   name: "Home",
   components: {
-    recommend
+    recommend,
+    songList
   },
   data() {
     return {

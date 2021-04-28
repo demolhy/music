@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "970753",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "19594586",
+      "name": "播放",
+      "font_class": "play",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "5238500",
+      "name": "皇冠",
+      "font_class": "huangguanguanjundiyihuiyuan",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "16846269",
       "name": "chevron_left_24px",
       "font_class": "chevron_left_24px",

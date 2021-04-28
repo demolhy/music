@@ -19,3 +19,11 @@ export const newMusic = e => {
 export const musicSrc = e => {
     return get('/song/url',e)
 }
+
+export const songList = e =>{
+    return get('/top/playlist',e)
+}
+
+export const songMenu = e =>{
+    return get('/playlist/catlist',e)
+}

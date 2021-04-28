@@ -56,7 +56,7 @@ export default {
         title: "Preparation",
         artist: "Hans Zimmer/Richard Harvey",
         src:
-          "http://m701.music.126.net/20210427220952/3444cf4236f8e63f5cc240254ee86491/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8660453303/e94a/ce98/de2b/9159b398d5a069b1638ab05ac8cbfece.mp3",
+          this.$store.state.src,
         pic:
           "http://p1.music.126.net/Cld-gajV3YescBzt1rWWbw==/109951165909496721.jpg",
         lrc: "[00:00.00]lrc here\n[00:01.00]aplayer",
