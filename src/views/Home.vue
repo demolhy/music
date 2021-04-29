@@ -13,7 +13,9 @@
       </ul>
     </div>
     <recommend v-if="false"></recommend>
-    <song-list></song-list>
+    <song-list v-if="false"></song-list>
+    <radio-show v-if="false"></radio-show>
+    <raking-list></raking-list>
   </div>
 </template>
 
@@ -21,11 +23,15 @@
 
 import recommend from './home_components/recommend'
 import songList from './home_components/songList'
+import radioShow from './home_components/radioShow'
+import rakingList from './home_components/rakingList'
 export default {
   name: "Home",
   components: {
     recommend,
-    songList
+    songList,
+    radioShow,
+    rakingList
   },
   data() {
     return {

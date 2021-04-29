@@ -26,6 +26,11 @@ Vue.use(VueRouter,icon)
     path: '/details',
     name: 'Details',
     component: () => import('../views/details.vue')
+  },
+  {
+    path: '/musicContent',
+    name: 'musicContent',
+    component: () => import('../views/musicContent.vue')
   }
 ]
 

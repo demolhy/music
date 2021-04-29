@@ -1,8 +1,6 @@
 <template>
-  <div class="music_list">
-      <div class="header">
-          
-      </div>
+  <div class="content">
+      213
   </div>
 </template>
 

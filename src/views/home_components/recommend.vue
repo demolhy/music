@@ -159,7 +159,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scpoed>
+<style lang="scss" scoped>
 .content img {
   width: 100%;
   height: 100%;

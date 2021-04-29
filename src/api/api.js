@@ -27,3 +27,7 @@ export const songList = e =>{
 export const songMenu = e =>{
     return get('/playlist/catlist',e)
 }
+
+export const musicItem = e =>{
+    return get('/playlist/detail',e)
+}
