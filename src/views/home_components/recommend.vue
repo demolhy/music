@@ -23,8 +23,8 @@
           <div
             class="box"
             v-for="(item, index) in songMenuList"
-            :data-id="item.id"
             :key="index"
+            @click="toListDetail(item.id)"
           >
             <div class="list1 list">
               <img :src="item.coverImgUrl" alt />
@@ -43,7 +43,7 @@
             class="list"
             v-for="(item, index) in newMusicList"
             :key="index"
-            @click="paly(item.id)"
+            @click="paly(item)"
           >
             <div class="lf">
               <span>{{ index + 1 }}</span>
@@ -65,21 +65,20 @@
 </template>
 
 <script>
-import {
-  musicList,
-  banner,
-  hotSongMenu,
-  newMusic,
-  musicSrc,
-} from "../../api/api";
+import { musicList, banner, hotSongMenu, newMusic } from "../../api/api";
 export default {
-  props: {},
+  props: {
+    parent: {
+      default: "",
+    },
+  },
   data() {
     return {
       bannerList: [],
       songMenuList: [],
       newMusicList: [],
       load: "",
+      viewLoad: 1,
     };
   },
   created() {},
@@ -93,11 +92,28 @@ export default {
     //   background: "rgba(0, 0, 0, 0.6)",
     //   fullscreen: false,
     // });
-    this.getBanner();
-    this.getSongMenu();
-    this.getNewMusic();
+    // console.log("index:", this.parent);
+    if (this.viewLoad == 1 && this.parent === 1) {
+      console.log(this.viewLoad);
+      this.viewLoad = 2;
+      this.getBanner();
+      this.getSongMenu();
+      this.getNewMusic();
+    }
+  },
+  destroyed() {
+    console.log("离开");
   },
   methods: {
+    toListDetail(e) {
+      console.log(e);
+      this.$router.push({
+        name: "musicContent",
+        params: {
+          id: e,
+        },
+      });
+    },
     getList() {
       let data = {
         id: 186016,
@@ -145,15 +161,33 @@ export default {
       });
       // this.load.close()
     },
-    paly(e) {
-      let data = {
-        id: e,
-      };
-      musicSrc(data).then((res) => {
-        // console.log();
-        this.$store.commit("changeSrc", res.data[0].url);
-      });
+    paly(song) {
+      console.log('song',song);
+      this.$store.commit('setSong', {});
+      // let data = {
+      //   id: song.id
+      // }
+      // let obj = {};
+      // obj.id = song.id;
+      // obj.title = song.name;
+      // obj.artist = song.singerName;
+      // obj.pic = song.picUrl;
+      this.$store.commit('setSong', song.id);
       
+      this.$router.push({
+        name: "Details",
+        params: {
+          id: song.id
+        },
+      });
+      // this.$store.commit("changeSrc", e)
+      // let data = {
+      //   id: e,
+      // };
+      // musicSrc(data).then((res) => {
+      //   console.log(res.data[0].url);
+      //   this.$store.commit("changeSrc", res.data[0].url);
+      // });
     },
   },
 };

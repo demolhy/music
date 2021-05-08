@@ -6,8 +6,8 @@
         <span>网易云音乐</span>
       </div>
       <div class="page">
-        <span class="iconfont icon-chevron_left_24px"></span>
-        <span class="iconfont icon-chevron_right_24px"></span>
+        <!-- <span class="iconfont icon-chevron_left_24px"></span>
+        <span class="iconfont icon-chevron_right_24px"></span> -->
       </div>
       <div class="search">
         <input type="text" placeholder="搜索音乐" />
@@ -15,9 +15,9 @@
       </div>
     </div>
     <div class="right">
-      <div class="photo">
-        <img src="../assets/img1.jpg" alt />
-        <span>Lin</span>
+      <div class="photo" @click="login">
+        <img src="../assets/login2.png" alt />
+        <span>未登录</span>
       </div>
       <div class="icon">
         <i class="icon1 iconfont icon-xin"></i>
@@ -40,6 +40,11 @@ export default {
   name: "Header",
   props: {
     msg: String
+  },
+  methods:{
+    login(){
+      this.$bus.$emit('login')
+    }
   }
 };
 </script>

@@ -3,6 +3,7 @@
     <HeaderNav msg="hello" />
     <Left />
     <Footer />
+    <Login></Login>
     <!-- <videoBox /> -->
     <!-- <div id="nav">
       <router-link to="/">Home</router-link>
@@ -18,12 +19,14 @@ import HeaderNav from "@/components/Header.vue";
 import Left from "@/components/Left.vue";
 import Footer from "@/components/Footer.vue";
 import videoBox from "@/components/music.vue";
+import Login from "@/components/Login.vue"
 export default {
   components: {
     HeaderNav,
     Left,
     Footer,
-    videoBox
+    videoBox,
+    Login
   }
 };
 </script>

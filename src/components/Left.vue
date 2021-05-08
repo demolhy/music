@@ -129,7 +129,8 @@ export default {
             {
               key: 9,
               icon: "icon-xinaixin",
-              name: "我喜欢的音乐"
+              name: "我喜欢的音乐",
+              url: ""
             }
           ]
         }

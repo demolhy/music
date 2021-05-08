@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="hot_header">
+    <!-- <div class="hot_header">
       <img
         class="lf"
         src="http://p4.music.126.net/LGoo2i-SmnY4N_kdujnG3g==/109951165547651858.jpg?param=200y200"
@@ -18,7 +18,7 @@
         class="bg"
         style="background-image: url('http://p4.music.126.net/LGoo2i-SmnY4N_kdujnG3g==/109951165547651858.jpg?param=200y200');"
       ></div>
-    </div>
+    </div> -->
     <div class="list_nav">
       <div class="lf" @click="cutNav()">全部歌单 ></div>
       <div class="rg">
@@ -37,7 +37,7 @@
         :data-id="item.id"
         :key="index"
       >
-        <div class="list1 list">
+        <div class="list1 list" @click="toListDetail(item.id)">
           <img :src="item.coverImgUrl" alt />
           <div class="btm">
             <i class="iconfont icon-yonghu"></i>{{ item.creator.nickname }}
@@ -91,6 +91,15 @@ export default {
     this.getSongList();
   },
   methods: {
+    toListDetail(e){
+      console.log(e);
+      this.$router.push({
+        name: 'musicContent',
+        params:{
+          id: e
+        }
+      })
+    },
     getSongList(e) {
       let data = {
         limit: 20,
@@ -176,6 +185,7 @@ export default {
   justify-content: space-between;
   align-items: flex-end;
   margin: 20px 0;
+  margin-top: 0;
   .lf {
     border: 1px solid #ccc;
     color: #333;

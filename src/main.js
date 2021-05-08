@@ -10,6 +10,11 @@ import {
   Loading
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// import APlayer from '@moefe/vue-aplayer';
+// Vue.use(APlayer, {
+//   defaultCover: 'https://github.com/u3u.png',
+//   productionTip: true,
+// });
 
 
 // Vue.use(ElementUI);
@@ -19,6 +24,7 @@ Vue.use(CarouselItem);
 Vue.config.productionTip = false
 Vue.prototype.$message = Message;
 Vue.prototype.$loading = Loading.service;
+Vue.prototype.$bus = new Vue()
 
 new Vue({
   router,

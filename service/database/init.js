@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const db = 'mongodb://localhost/big-db'
+const db = 'mongodb://localhost/music_user'
 const glob = require('glob')
 const {
     resolve

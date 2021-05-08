@@ -37,7 +37,9 @@
               <span>歌曲数：{{ songList.playlist.trackCount }}</span>
               <span>播放数：{{ songList.playlist.playCount }}</span>
             </div>
-            <div class="list">简介：{{ songList.playlist.description }}</div>
+            <div class="list text" :title="songList.playlist.description">
+              简介：{{ songList.playlist.description }}
+            </div>
           </div>
         </div>
       </div>
@@ -62,14 +64,14 @@
             :key="index"
           >
             <div class="item1">
-              <span>{{ index + 1}}</span>
+              <span>{{ index + 1 }}</span>
               <i class="iconfont icon-xinaixin"></i>
               <i class="iconfont icon-xiazai"></i>
             </div>
-            <div class="item2">{{item.name}}</div>
-            <div class="item3">{{item.ar[0].name}}</div>
-            <div class="item4">{{item.al.name}}</div>
-            <div class="item5">05:00</div>
+            <div class="item2">{{ item.name }}</div>
+            <div class="item3">{{ item.ar[0].name }}</div>
+            <div class="item4">{{ item.al.name }}</div>
+            <div class="item5">{{ item.dt }}</div>
           </div>
           <!-- <div class="list">
             <div class="item1">
@@ -94,23 +96,52 @@ export default {
   data() {
     return {
       songList: [],
+      id: "",
     };
   },
   mounted() {
+    this.id = this.$route.params.id;
+    console.log(this.$route.params.id);
     this.getSongItem();
+  },
+  computed: {
+    // times(){
+    //   // console.log(event);
+    //   let obj = ''
+    //   return obj
+    // }
   },
   methods: {
     getSongItem() {
       let data = {
-        id: 4924299113,
+        id: this.id,
       };
       musicItem(data).then((res) => {
         console.log(res);
+        res.playlist.tracks.map((item) => {
+          // console.log(item.dt);
+          let time = Number(
+            item.dt.toString().substr(0, item.dt.toString().length - 3)
+          );
+          item.dt = this.times(time);
+        });
         this.songList = res;
       });
     },
     toNum(num) {
       console.log(num);
+    },
+    times(data) {
+      let s;
+      let minutes = parseInt(data / 60);
+      let seconds = data - minutes * 60;
+      s =
+        (minutes < 10 ? "0" + minutes : minutes) +
+        ":" +
+        (seconds < 10 ? "0" + seconds : seconds);
+      console.log(s);
+      return s;
+      // console.log(event);
     },
   },
 };
@@ -151,6 +182,7 @@ export default {
   }
   .rg {
     margin-left: 30px;
+    width: 80%;
     .title {
       display: flex;
       align-items: center;
@@ -223,9 +255,16 @@ export default {
         color: #999;
         font-size: 12px;
         margin-top: 6px;
+
         span {
           margin-right: 20px;
         }
+      }
+      .text {
+        width: 80%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
   }
@@ -267,13 +306,22 @@ export default {
       &:nth-child(even) {
         background: #f5f5f5;
       }
+      &>div{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-right: 30px;
+        box-sizing: border-box;
+      }
       .item1 {
-        width: 6%;
+        width: 70px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-right: 20px;
-
+        span{
+          width: 10%;
+        }
         i {
           font-size: 12px;
           cursor: pointer;
@@ -287,6 +335,7 @@ export default {
       }
       .item2 {
         width: 40%;
+        
       }
       .item3 {
         width: 20%;

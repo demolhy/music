@@ -3,40 +3,74 @@
     <div class="page_nav">
       <ul>
         <li
-          @click="toDetail(index)"
           :class="li_on == index ? 'on' : ''"
           v-for="(item, index) in li_list"
           :key="index"
+          @click="toDetail(item.key,item.index)"
         >
-          {{ item }}
+          {{ item.name }}
         </li>
       </ul>
     </div>
-    <recommend v-if="false"></recommend>
-    <song-list v-if="false"></song-list>
-    <radio-show v-if="false"></radio-show>
-    <raking-list></raking-list>
+    <component :is="currentView" :parent="viewIndex" :key="li_on"></component>
+    <!-- <recommend :show="statu"></recommend>
+    <song-list :show="statu"></song-list>
+    <radio-show :show="statu"></radio-show>
+    <raking-list :show="statu"></raking-list> -->
   </div>
 </template>
 
 <script>
-
-import recommend from './home_components/recommend'
-import songList from './home_components/songList'
-import radioShow from './home_components/radioShow'
-import rakingList from './home_components/rakingList'
+import recommend from "./home_components/recommend";
+import songList from "./home_components/songList";
+import radioShow from "./home_components/radioShow";
+import rakingList from "./home_components/rakingList";
 export default {
   name: "Home",
   components: {
     recommend,
     songList,
     radioShow,
-    rakingList
+    rakingList,
   },
   data() {
     return {
       li_on: 0,
-      li_list: ["个性推荐", "歌单", "主播电台", "排行榜", "歌手", "最新音乐"],
+      // li_list1: ["个性推荐", "歌单", "主播电台", "排行榜", "歌手", "最新音乐"],
+      currentView:'recommend',
+      viewIndex: 1,
+      li_list: [
+        {
+          name: "个性推荐",
+          key: "recommend",
+          index: 0
+        },
+        {
+          name: "歌单",
+          key: "songList",
+          index: 1
+        },
+        {
+          name: "主播电台",
+          key: "radioShow",
+          index: 2
+        },
+        {
+          name: "排行榜",
+          key: "radioShow",
+          index: 3
+        },
+        {
+          name: "歌手",
+          key: "radioShow",
+          index: 4
+        },
+        {
+          name: "最新音乐",
+          key: "radioShow",
+          index: 5
+        },
+      ],
       imgUrl: [
         "http://p1.music.126.net/WXrqJFTt5NwDaJm4JuGPNw==/109951165297673385.jpg?imageView&quality=89",
         "http://p1.music.126.net/ZGUns7WvgJ0ZF4txDMy2BA==/109951165367464959.jpg?imageView&quality=89",
@@ -46,20 +80,23 @@ export default {
       bannerList: [],
       songMenuList: [],
       newMusicList: [],
+      statu: 1,
     };
   },
   // created() {},
   mounted() {
     // this.getList();
-    
   },
   computed: {},
   methods: {
-    toDetail(e) {
+    toDetail(name,index) {
       // console.log(e);
-      this.li_on = e;
-    }
-    
+      this.currentView = name
+      this.li_on = index;
+    },
+    finish(e) {
+      console.log(e, "我是子组件传值");
+    },
   },
   // mounted() {
   //   console.log("Current Swiper instance object", this.swiper);

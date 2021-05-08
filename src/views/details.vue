@@ -1,15 +1,14 @@
 <template>
-  <div class="box_content">
-    <div class="bg-blur"></div>
+  <div class="ani_box" :class="boxShow === true ? 'on' : ''">
+    <!-- <div
+      class="bg-blur"
+      :style="'background: url(' + songData.al.picUrl + ')'"
+    ></div> -->
     <div class="content">
-      <div class="ms">
+      <div class="ms" v-if="songData.al">
         <div class="lf">
           <!-- <img src="../assets/singlecover.png" alt=""> -->
-          <img
-            class="cover"
-            src="http://p2.music.126.net/qseUH9tBtprMauNYv5jR8Q==/109951164373664324.jpg?param=130y130"
-            alt=""
-          />
+          <img class="cover" :src="songData.al.picUrl" alt="" />
           <div class="m_btn">
             <div class="btn"><i class="iconfont icon-xinaixin"></i>喜欢</div>
             <div class="btn"><i class="iconfont icon-shoucang"></i>收藏</div>
@@ -18,10 +17,14 @@
           </div>
         </div>
         <div class="rg">
-          <div class="title">千千阙歌(Live)</div>
+          <div class="title">{{ songData.name }}</div>
           <ul class="gs">
-            <li>专辑：<span>Crush 2</span></li>
-            <li>歌手：<span>W/N / Tezdy / Tien</span></li>
+            <li>
+              专辑：<span>{{ songData.al.name }}</span>
+            </li>
+            <li>
+              歌手：<span>{{ songData.ar[0].name }}</span>
+            </li>
           </ul>
           <div class="lyric">
             <ul v-if="objLyric">
@@ -37,65 +40,29 @@
         </div>
       </div>
       <div class="comment">
-        <div class="title">听友评论<span>(已有0条评论)</span></div>
+        <div class="title">听友评论<span>(已有{{total + 1}}条评论)</span></div>
         <div class="com_input">
           <input type="text" placeholder="发表评论" />
           <button>发送</button>
         </div>
-        <div class="hot_com">
-          <div class="list">
+        <div class="hot_com" >
+          <div class="list" v-for="(item,index) in commentList" :key="index">
             <div class="lf">
-              <img src="../assets/img1.jpg" alt="" />
+              <img :src="item.user.avatarUrl" alt="" />
             </div>
             <div class="rg">
               <div class="com">
-                <span class="name">kilig:</span>
+                <span class="name">{{item.user.nickname}}:</span>
                 <span
-                  >当年红馆告别演唱会，她就退出歌坛踏上美国的求学之路，唱出这首歌的时候，全场泪飚。因为求学，当年人生中第一次远离家乡，乘坐大巴去往广州，再转火车到东北。大巴上一路单循就是这首。有些词曲，旋律，一旦响起，勾起的不但是回忆，更是一段往昔珍藏的情感。</span
+                  >{{item.content}}</span
                 >
               </div>
               <div class="btm">
                 <div class="time">2021年2月10日 10:10</div>
                 <div class="btn">
-                  <div class="btn1"><i class="iconfont icon-xinaixin"></i><span>(200)</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list">
-            <div class="lf">
-              <img src="../assets/img1.jpg" alt="" />
-            </div>
-            <div class="rg">
-              <div class="com">
-                <span class="name">kilig:</span>
-                <span
-                  >当年红馆告别演唱会，她就退出歌坛踏上美国的求学之路，唱出这首歌的时候，全场泪飚。因为求学，当年人生中第一次远离家乡，乘坐大巴去往广州，再转火车到东北。大巴上一路单循就是这首。有些词曲，旋律，一旦响起，勾起的不但是回忆，更是一段往昔珍藏的情感。</span
-                >
-              </div>
-              <div class="btm">
-                <div class="time">2021年2月10日 10:10</div>
-                <div class="btn">
-                  <div class="btn1"><i class="iconfont icon-xinaixin"></i><span>(200)</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list">
-            <div class="lf">
-              <img src="../assets/img1.jpg" alt="" />
-            </div>
-            <div class="rg">
-              <div class="com">
-                <span class="name">kilig:</span>
-                <span
-                  >当年红馆告别演唱会，她就退出歌坛踏上美国的求学之路，唱出这首歌的时候，全场泪飚。因为求学，当年人生中第一次远离家乡，乘坐大巴去往广州，再转火车到东北。大巴上一路单循就是这首。有些词曲，旋律，一旦响起，勾起的不但是回忆，更是一段往昔珍藏的情感。</span
-                >
-              </div>
-              <div class="btm">
-                <div class="time">2021年2月10日 10:10</div>
-                <div class="btn">
-                  <div class="btn1"><i class="iconfont icon-xinaixin"></i><span>(200)</span></div>
+                  <div class="btn1">
+                    <i class="iconfont icon-xinaixin"></i><span>({{item.likedCount}})</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -107,30 +74,62 @@
   </div>
 </template>
 <script>
+import { musicDetail, comment, lyric } from "../api/api";
 export default {
   name: "Details",
   data() {
     return {
-      lyric: `[by:小懒猫stad]
-[00:02.689]我多想回到那个夏天
-[00:05.939]蝉鸣在田边吹过眼睫
-[00:09.948]贪恋夏夜星空你侧脸
-[00:13.197]犹记得清风撩拨心弦
-[00:17.162]初夏的味道是你微笑
-[00:20.343]我捧着月亮别来无恙
-[00:23.343]我捧着月亮别来无恙
-[00:25.343]我捧着月亮别来无恙
-[00:30.343]我捧着月亮别来无恙
-[00:32.343]我捧着月亮别来无恙`,
+      lyric: '',
       img: "",
       objLyric: [],
       Lyindex: 0,
+      boxShow: false,
+      songId: 347230,
+      songData: [],
+      commentList:[],
+      total: '',
     };
   },
   created() {
-    this.start();
+    this.boxShow = true
+  },
+  mounted() {
+    this.songId = this.$route.params.id
+    this.$bus.$on("show", this.changeClass);
+    this.getSongDetail();
+    
   },
   methods: {
+    getSongDetail() {
+      let data = {
+        ids: this.songId
+      };
+      let dataComment = {
+        type: 0,
+        id: this.songId
+      }
+      let dataLyric = {
+        id: this.songId
+      }
+      lyric(dataLyric).then(res=>{
+        // console.log(res.lrc.lyric);
+        this.lyric = res.lrc.lyric
+        this.start();
+      })
+      musicDetail(data).then((res) => {
+        // console.log(res.songs[0]);
+        this.songData = res.songs[0];
+      });
+      comment(dataComment).then(res=>{
+        console.log(res);
+        this.commentList = res.hotComments
+        this.total = res.total
+      })
+      
+    },
+    changeClass() {
+      console.log("触发");
+    },
     start() {
       const regNewline = /\n/;
       const lineArr = this.lyric.split(regNewline);
@@ -148,7 +147,7 @@ export default {
           this.objLyric.push(obj);
         }
       });
-      console.log(this.objLyric);
+      // console.log(this.objLyric);
     },
     formatLyricTime(time) {
       // 格式化歌词的时间 转换成 sss:ms
@@ -171,6 +170,20 @@ export default {
 };
 </script>
 <style lang="scss" scope>
+.ani_box {
+  transition: all 0.5s;
+  position: fixed;
+  left: 0;
+  top: 200%;
+  width: 100%;
+  z-index: 1000;
+  background: #fff;
+  bottom: 0;
+  overflow: auto;
+  &.on {
+    top: 0;
+  }
+}
 .ms {
   display: flex;
   margin-top: 30px;
@@ -187,7 +200,7 @@ export default {
       border-radius: 50%;
       transition: all 0.5s;
       transform: rotate(30deg);
-      animation: ratate 10s linear infinite;
+      animation: ratate 20s linear infinite;
     }
     .m_btn {
       margin-top: 30px;
@@ -306,7 +319,7 @@ export default {
     }
   }
   .hot_com {
-    padding-bottom: 80px;
+    // padding-bottom: 80px;
     .list {
       display: flex;
       padding: 15px 0;
@@ -321,7 +334,8 @@ export default {
         }
       }
       .rg {
-        font-size: 14px;
+        font-size: 13px;
+        width: 100%;
         span {
           line-height: 25px;
         }
@@ -336,15 +350,14 @@ export default {
           .time {
             color: #999;
             font-size: 12px;
-            
           }
-          .btn1{
+          .btn1 {
             cursor: pointer;
-            i{
+            i {
               font-size: 12px;
               color: #999;
             }
-            span{
+            span {
               font-size: 12px;
               color: #999;
               margin-left: 4px;
@@ -353,7 +366,7 @@ export default {
         }
       }
     }
-    .base{
+    .base {
       text-align: center;
       font-size: 12px;
       color: #999;
@@ -367,13 +380,12 @@ export default {
   left: 0;
   // transform: translate(-50%, -50%);
   width: 100%;
-  height: 45%;
+  height: 40%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   filter: blur(70px);
   z-index: -1;
-  background: url("https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2151136234,3513236673&fm=26&gp=0.jpg");
 }
 @keyframes ratate {
   0% {
