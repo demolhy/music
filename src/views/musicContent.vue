@@ -62,6 +62,7 @@
             class="list"
             v-for="(item, index) in songList.playlist.tracks"
             :key="index"
+             @click="toDetails(item.id)"
           >
             <div class="item1">
               <span>{{ index + 1 }}</span>
@@ -112,6 +113,14 @@ export default {
     // }
   },
   methods: {
+    toDetails(){
+      this.$router.push({
+        name: "Details",
+        params: {
+          id: song.id
+        },
+      });
+    },
     getSongItem() {
       let data = {
         id: this.id,
