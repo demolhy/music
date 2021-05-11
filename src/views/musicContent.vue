@@ -113,11 +113,11 @@ export default {
     // }
   },
   methods: {
-    toDetails(){
+    toDetails(id){
       this.$router.push({
         name: "Details",
         params: {
-          id: song.id
+          id: id
         },
       });
     },
